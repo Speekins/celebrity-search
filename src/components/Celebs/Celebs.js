@@ -11,7 +11,6 @@ const Celebs = ({ celebs }) => {
   })
   return (
     <>
-      <h1>This is where celeb cards will go</h1>
       {allCelebs}
     </>
   )
