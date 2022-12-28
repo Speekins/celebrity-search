@@ -1,5 +1,4 @@
 const celebsData = [{
-  "id": 1,
   "name": "michael jordan",
   "occupation": [
     "basketball_player",
@@ -9,7 +8,6 @@ const celebsData = [{
     "actor"
   ]
 }, {
-  "id": 2,
   "name": "jennifer aniston",
   "occupation": [
     "actor",
@@ -18,7 +16,6 @@ const celebsData = [{
     "film_producer"
   ]
 }, {
-  "id": 3,
   "name": "donald trump",
   "occupation": [
     "entrepreneur",
@@ -33,20 +30,17 @@ const celebsData = [{
     "real_estate_entrepreneur"
   ]
 }, {
-  "id": 4,
   "name": "princess diana",
   "occupation": [
     "crown_princess"
   ]
 }, {
-  "id": 5,
   "name": "aaron rodgers",
   "occupation": [
     "american_football_player",
     "athlete"
   ]
 }, {
-  "id": 6,
   "name": "dick van dyke",
   "occupation": [
     "singer",
@@ -60,7 +54,6 @@ const celebsData = [{
     "screenwriter"
   ]
 }, {
-  "id": 7,
   "name": "hayley williams",
   "occupation": [
     "singer-songwriter",
@@ -68,7 +61,6 @@ const celebsData = [{
     "musician"
   ]
 }, {
-  "id": 8,
   "name": "sigourney weaver",
   "occupation": [
     "actor",

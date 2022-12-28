@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
-const Form = ({ submitSearch }) => {
+const Form = ({ submitSearch, clearSearch }) => {
   const [searchTerm, setSearch] = useState('')
 
   const handleChange = (e) => {
@@ -8,9 +8,13 @@ const Form = ({ submitSearch }) => {
     setSearch(value)
   }
 
-  const handleClick = () => {
-    submitSearch(searchTerm)
-    setSearch('')
+  const handleClick = (e) => {
+    if (e.target.id === 'submit') {
+      submitSearch(searchTerm)
+    } else {
+      clearSearch(searchTerm)
+      setSearch('')
+    }
   }
 
   return (
@@ -21,7 +25,8 @@ const Form = ({ submitSearch }) => {
         value={searchTerm}
         onChange={(event) => handleChange(event)}
       />
-      <button id='submit'onClick={() => handleClick()}>Submit</button>
+      <button id='submit' onClick={(event) => handleClick(event)}>Submit</button>
+      <button id='clear' onClick={(event) => handleClick(event)}>Clear Search</button>
     </>
   )
 }

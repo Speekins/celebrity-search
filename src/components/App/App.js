@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch, Link } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import celebsData from '../../celebData'
 import Celebs from '../Celebs/Celebs'
 import CelebDetail from '../Celeb-detail/Celeb-detail'
@@ -8,49 +8,67 @@ import fetchData from '../../apiCalls'
 
 const App = () => {
   const [celebs, setCelebs] = useState([])
-
-  const getCelebData = (data) => {
-    setCelebs(data)
-  }
+  const [searchTerm, setSearchTerm] = useState('')
+  const [searchedCelebs, setSearchedCelebs] = useState([])
 
   useEffect(() => {
-    if (!celebs.length) {
-      getCelebData(celebsData)
+    if (searchTerm) {
+      fetchData(`https://api.api-ninjas.com/v1/celebrity?name=${searchTerm}`)
+      .then(response => setSearchedCelebs(setID(response)))
+      .then(() => setSearchTerm(''))
     } else {
-      getCelebData(celebs)
+      setCelebs(setID(celebsData))
     }
-  }, [])
+  }, [searchTerm])
 
   const exactMatch = (id) => {
+    if (searchedCelebs.length) {
+      return searchedCelebs.find(celeb => celeb.id === Number(id))
+    }
     return celebs.find(celeb => celeb.id === Number(id))
   }
 
-  const setID = () => {
-    
+  const setID = (data) => {
+    let value = 0
+    data.forEach(element => {
+      element.id = value
+      value += 1
+    })
+    return data
   }
 
   const submitSearch = (name) => {
-    fetchData(`https://api.api-ninjas.com/v1/celebrity?name=${name}`)
-      .then(data => setCelebs(data))
-      .then(() => console.log(celebs))
+    setSearchTerm(name)
+  }
+
+  const clearSearch = () => {
+    setSearchedCelebs([])
   }
 
   return (
     <Switch>
       <Route exact path='/'
         render={() => {
+          if (searchedCelebs.length) {
+            return (
+              <>
+                <Form submitSearch={submitSearch} clearSearch={clearSearch} />
+                <Celebs celebs={searchedCelebs} />
+              </>
+            )
+          }
           return (
             <>
-              <Form submitSearch={submitSearch} />
+              <Form submitSearch={submitSearch} clearSearch={clearSearch} />
               <Celebs celebs={celebs} />
             </>
           )
         }} />
       <Route path='/:id'
         render={({ match }) => {
-          let celeb = exactMatch(match.params.id)
+          let celebDetail = exactMatch(match.params.id)
           return (
-            <CelebDetail celeb={celeb} />
+            <CelebDetail celebDetail={celebDetail} />
           )
         }} />
     </Switch>
