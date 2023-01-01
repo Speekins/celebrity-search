@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './Form.css'
 
 const Form = ({ submitSearch, clearSearch }) => {
   const [searchTerm, setSearch] = useState('')
@@ -18,7 +19,7 @@ const Form = ({ submitSearch, clearSearch }) => {
   }
 
   return (
-    <>
+    <div class='search-form'>
       <input id='search'
         type={'search'}
         placeholder='Search'
@@ -27,7 +28,7 @@ const Form = ({ submitSearch, clearSearch }) => {
       />
       <button id='submit' onClick={(event) => handleClick(event)}>Submit</button>
       <button id='clear' onClick={(event) => handleClick(event)}>Clear Search</button>
-    </>
+    </div>
   )
 }
 

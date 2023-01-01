@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Card from '../Card/Card'
+import './Celebs.css'
 
 const Celebs = ({ celebs }) => {
 
@@ -10,9 +11,9 @@ const Celebs = ({ celebs }) => {
       key={celeb.id} />
   })
   return (
-    <>
+    <div class='celebs-container'>
       {allCelebs}
-    </>
+    </div>
   )
 }
 
